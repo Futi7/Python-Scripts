@@ -1,2 +1,0 @@
-
-print("merhaba" * 50)
