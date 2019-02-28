@@ -1,50 +1,47 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'listView.ui'
+# Form implementation generated from reading ui file 'listView2.ui'
 #
 # Created by: PyQt5 UI code generator 5.12
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QInputDialog, QDialog
 
-
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(461, 252)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.listWidget = QtWidgets.QListWidget(self.centralwidget)
-        self.listWidget.setGeometry(QtCore.QRect(0, 0, 291, 201))
-        self.listWidget.setObjectName("listWidget")
-        self.Add = QtWidgets.QPushButton(self.centralwidget)
-        self.Add.setGeometry(QtCore.QRect(330, 10, 89, 25))
+class Ui_Dialog(QDialog):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(502, 250)
+        self.list = QtWidgets.QListWidget(Dialog)
+        self.list.setGeometry(QtCore.QRect(40, 10, 256, 192))
+        self.list.setObjectName("list")
+        self.Add = QtWidgets.QPushButton(Dialog)
+        self.Add.setGeometry(QtCore.QRect(400, 10, 89, 25))
         self.Add.setObjectName("Add")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(330, 50, 89, 25))
+        self.pushButton_2 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_2.setGeometry(QtCore.QRect(400, 50, 89, 25))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.Quit = QtWidgets.QPushButton(self.centralwidget)
-        self.Quit.setGeometry(QtCore.QRect(330, 170, 89, 25))
-        self.Quit.setObjectName("Quit")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 461, 22))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, MainWindow):
+        self.Add.clicked.connect(self.AddData)
+
+
+    def AddData(self):
+        row = self.list.currentRow()
+        text, ok = QInputDialog.getText(self, "Employee Dialog", "Enter EMployee")
+        if ok and text is not None:
+            self.list.insertItem(row, text)
+
+
+
+    def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.Add.setText(_translate("MainWindow", "Add"))
-        self.pushButton_2.setText(_translate("MainWindow", "Delete"))
-        self.Quit.setText(_translate("MainWindow", "Quit"))
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.Add.setText(_translate("Dialog", "Add"))
+        self.pushButton_2.setText(_translate("Dialog", "Delete"))
 
 
 
@@ -52,8 +49,8 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
     sys.exit(app.exec_())
