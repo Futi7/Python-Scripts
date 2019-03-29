@@ -40,6 +40,7 @@ class Ui_MainWindow(object):
     def musteriEkle(self):
         global pizzaCounter
         global kolaCounter
+        global fiyat
         Siparis = []
 
         musteriIsim = str(self.Musteri.text())
@@ -48,7 +49,11 @@ class Ui_MainWindow(object):
         Siparis.append("xPizza")
         Siparis.append(kolaCounter)
         Siparis.append("xKola")
-        self.listWidget.addItem(musteriIsim)
+        self.listWidget.clear()
+        self.listWidget.addItem(musteriIsim + " " * 12 + str(pizzaCounter) + "xPizza" + " " * 12 + str(
+            kolaCounter) + "xKola" + " " * 12 + str(fiyat) + "tl")
+        fiyat = 0
+        self.guncelle()
 
     def urunSil(self):
         global fiyat
