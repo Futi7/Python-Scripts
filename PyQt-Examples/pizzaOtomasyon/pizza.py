@@ -10,8 +10,6 @@ class Ui_MainWindow(object):
     kolaCounter = 0
     global fiyat
     fiyat = 0
-    global Siparis
-    Siparis = []
 
 
 
@@ -41,18 +39,31 @@ class Ui_MainWindow(object):
         global pizzaCounter
         global kolaCounter
         global fiyat
-        Siparis = []
-
         musteriIsim = str(self.Musteri.text())
-        Siparis.append(musteriIsim)
-        Siparis.append(pizzaCounter)
-        Siparis.append("xPizza")
-        Siparis.append(kolaCounter)
-        Siparis.append("xKola")
-        self.listWidget.clear()
+        client_items = self.listWidget.findItems(
+            "Pizza",
+            QtCore.Qt.MatchExactly
+        )
+        for item in reversed(client_items):
+            row = self.listWidget.row(item)
+            it = self.listWidget.takeItem(row)
+            del it
+        kola_items = self.listWidget.findItems(
+            "Kola",
+            QtCore.Qt.MatchExactly
+        )
+        for item in reversed(kola_items):
+            row = self.listWidget.row(item)
+            it = self.listWidget.takeItem(row)
+            del it
+
+
         self.listWidget.addItem(musteriIsim + " " * 12 + str(pizzaCounter) + "xPizza" + " " * 12 + str(
             kolaCounter) + "xKola" + " " * 12 + str(fiyat) + "tl")
         fiyat = 0
+        pizzaCounter = 0
+        kolaCounter = 0
+        self.Musteri.setText("")
         self.guncelle()
 
     def urunSil(self):
